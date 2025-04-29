@@ -18,6 +18,15 @@ class CalculatorsController < ApplicationController
   private
 
   def calculate_sum(input)
-    input.to_s.strip.empty? ? 0 : input.to_i
+    return 0 if input.empty?
+    
+    # If the input contains a comma, split and sum the numbers
+    if input.include?(',')
+      numbers = input.split(',').map(&:to_i)
+      return numbers.sum
+    else
+      # For a single number, just convert it to integer
+      return input.to_i
+    end
   end
 end

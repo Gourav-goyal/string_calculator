@@ -11,5 +11,10 @@ RSpec.describe "Calculators", type: :request do
       post "/add", numbers: "5"
       expect(JSON.parse(response.body)["result"]).to eq(5)
     end
+
+    it "adds two numbers" do
+      post "/add", numbers: "1,2"
+      expect(JSON.parse(response.body)["result"]).to eq(3)
+    end
   end
 end
