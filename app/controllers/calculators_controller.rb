@@ -1,12 +1,8 @@
 class CalculatorsController < ApplicationController
 
   def add
-    numbers_string = params[:numbers] || ""
-
-    # Debug logging
-    Rails.logger.info "Received parameters: #{params.inspect}"
-    Rails.logger.info "Numbers string: #{numbers_string.inspect}"
-
+    numbers_string = params[:numbers].to_s
+    
     begin
       result = calculate_sum(numbers_string)
       render json: { result: result }
@@ -35,12 +31,16 @@ class CalculatorsController < ApplicationController
     numbers_string = numbers_string.gsub("\n", delimiter)
     
     # Split by delimiter and convert to integers
-    if numbers_string.include?(delimiter)
-      numbers = numbers_string.split(delimiter).map(&:to_i)
-      return numbers.sum
-    else
-      # For a single number, just convert it to integer
-      return numbers_string.to_i
+    numbers = numbers_string.include?(delimiter) ? 
+              numbers_string.split(delimiter).map(&:to_i) : 
+              [numbers_string.to_i]
+    
+    # Check for negative numbers
+    negatives = numbers.select { |n| n < 0 }
+    if negatives.any?
+      raise ArgumentError, "negative numbers not allowed: #{negatives.join(',')}"
     end
+    
+    return numbers.sum
   end
 end

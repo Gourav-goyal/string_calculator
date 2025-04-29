@@ -31,5 +31,11 @@ RSpec.describe "Calculators", type: :request do
       post "/add", numbers: "//;\n1;2"
       expect(JSON.parse(response.body)["result"]).to eq(3)
     end
+
+    it "raises error for negative numbers" do
+      post "/add", numbers: "1,-2,3,-4"
+      expect(response.status).to eq(400)
+      expect(JSON.parse(response.body)["error"]).to include("-2,-4")
+    end
   end
 end
