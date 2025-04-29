@@ -20,6 +20,9 @@ class CalculatorsController < ApplicationController
   def calculate_sum(input)
     return 0 if input.empty?
     
+    # Replace newlines with commas
+    input = input.gsub("\n", ",")
+    
     # If the input contains a comma, split and sum the numbers
     if input.include?(',')
       numbers = input.split(',').map(&:to_i)

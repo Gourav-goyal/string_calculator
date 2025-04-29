@@ -21,5 +21,10 @@ RSpec.describe "Calculators", type: :request do
       post "/add", numbers: "1,2,3,4"
       expect(JSON.parse(response.body)["result"]).to eq(10)
     end
+
+    it "supports newlines between numbers" do
+      post "/add", numbers: "1\n2,3"
+      expect(JSON.parse(response.body)["result"]).to eq(6)
+    end
   end
 end
