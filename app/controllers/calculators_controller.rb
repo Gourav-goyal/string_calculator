@@ -18,6 +18,6 @@ class CalculatorsController < ApplicationController
   private
 
   def calculate_sum(input)
-    return 0 if input.to_s.strip.empty?
+    input.to_s.strip.empty? ? 0 : input.to_i
   end
 end

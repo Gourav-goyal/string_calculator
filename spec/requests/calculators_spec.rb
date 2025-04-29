@@ -6,5 +6,10 @@ RSpec.describe "Calculators", type: :request do
       post "/add", numbers: ""
       expect(JSON.parse(response.body)["result"]).to eq(0)
     end
+
+    it "returns number itself for single number" do
+      post "/add", numbers: "5"
+      expect(JSON.parse(response.body)["result"]).to eq(5)
+    end
   end
 end
