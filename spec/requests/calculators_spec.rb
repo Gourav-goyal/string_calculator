@@ -26,5 +26,10 @@ RSpec.describe "Calculators", type: :request do
       post "/add", numbers: "1\n2,3"
       expect(JSON.parse(response.body)["result"]).to eq(6)
     end
+
+    it "supports custom delimiter" do
+      post "/add", numbers: "//;\n1;2"
+      expect(JSON.parse(response.body)["result"]).to eq(3)
+    end
   end
 end

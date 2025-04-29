@@ -20,16 +20,27 @@ class CalculatorsController < ApplicationController
   def calculate_sum(input)
     return 0 if input.empty?
     
-    # Replace newlines with commas
-    input = input.gsub("\n", ",")
+    delimiter = ","
+    numbers_string = input
     
-    # If the input contains a comma, split and sum the numbers
-    if input.include?(',')
-      numbers = input.split(',').map(&:to_i)
+    # Check for custom delimiter
+    if input.start_with?("//")
+      # Extract the custom delimiter and the rest of the string
+      parts = input.split("\n", 2)
+      delimiter = parts[0][2..-1]  # Get the delimiter (after //)
+      numbers_string = parts[1]    # Get the numbers part
+    end
+    
+    # Replace newlines with the delimiter
+    numbers_string = numbers_string.gsub("\n", delimiter)
+    
+    # Split by delimiter and convert to integers
+    if numbers_string.include?(delimiter)
+      numbers = numbers_string.split(delimiter).map(&:to_i)
       return numbers.sum
     else
       # For a single number, just convert it to integer
-      return input.to_i
+      return numbers_string.to_i
     end
   end
 end
