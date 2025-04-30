@@ -29,6 +29,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'ffi', '~> 1.15.5'
 
+gem 'react-rails', '~> 2.6.0'  # Compatible with Rails 4.2
+gem 'sprockets', '~> 3.7.2'    # Ensure compatible sprockets version
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
