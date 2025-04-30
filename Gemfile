@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.8'
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3', '~> 1.3.6'  # This version is compatible with Ruby 2.7
+gem 'pg'  # This version is compatible with Ruby 2.7
 # Specify a compatible version of Rake
 gem 'rake', '~> 12.3.3'  # This version is compatible with Rails 4.2.8 and Ruby 2.7
 # Fix for BigDecimal issues
