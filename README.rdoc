@@ -1,28 +1,89 @@
-== README
+# String Calculator API
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A simple Rails API that provides string calculation functionality. This API accepts string inputs containing numbers and returns their sum, following specific parsing rules.
 
-Things you may want to cover:
+## Project Repository
 
-* Ruby version
+[GitHub Repository](https://github.com/Gourav-goyal/string_calculator/tree/master)
 
-* System dependencies
+## Features
 
-* Configuration
+- Accepts string inputs with numbers separated by delimiters
+- Supports custom delimiters
+- Validates input and provides appropriate error messages
+- Returns the sum of all valid numbers in the input
 
-* Database creation
+## Technical Details
 
-* Database initialization
+- **Ruby version**: (compatible with Ruby 2.7.0+)
+- **Rails version**: 4.2.8
+- **Database**:  SQLite (development)
 
-* How to run the test suite
+## API Endpoints
 
-* Services (job queues, cache servers, search engines, etc.)
+### Calculate Sum
+Apply
+POST /calculators/add
 
-* Deployment instructions
+**Parameters:**
+- `numbers` (string): A string containing numbers to be added
 
-* ...
+**Example Request:**
+```json
+{
+  "numbers": "1,2,3"
+}
+Example Response:
+{
+  "result": 6
+}
+Apply
+Error Response:
+{
+  "error": "Negatives not allowed: -1, -2"
+}
+Apply
+Input Format Rules
+1.
+Empty string returns 0
+2.
+Single number returns the number itself
+3.
+Two or more numbers separated by commas return the sum
+4.
+New lines between numbers are supported (e.g., "1\n2,3" returns 6)
+5.
+Custom delimiters can be specified (e.g., "//;\n1;2" returns 3)
+6.
+Negative numbers are not allowed and will throw an exception
+7.
+Numbers greater than 1000 are ignored
 
 
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+Local Development Setup
+1.
+Clone the repository:
+git clone https://github.com/Gourav-goyal/string_calculator.git
+cd string_calculator/string_calculator_api
+2.
+Install dependencies:
+bundle install
+3.
+Set up the database:
+bin/rails db:create
+bin/rails db:migrate
+4.
+Start the server:
+bin/rails server
+5.
+The API will be available at http://localhost:3000
+Testing
+Run the test suite with:
+bundle exec rspec spec/requests/calculators_spec.rb --format documentation
+
+## Future Improvements
+
+- Add support for different types of delimiters
+- Implement caching to improve performance
+- Add more comprehensive testing scenarios
+- Optimize the code for better performance
